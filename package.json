@@ -1,0 +1,27 @@
+{
+    "name": "lit"
+  , "version": "0.1.0"
+  , "description": "Micro-literate programming lib for javascript, inspired by docco"
+  , "author": "Casey Duncan <apres.project@gmail.com>"
+  , "contributors": []
+  , "repository": {
+    "type": "git",
+    "url": "https://github.com/apres/lit.js"
+  }
+  , "license": "MIT"
+  , "keywords": [
+    "literate", "micro"
+  ]
+  , "dependencies": {
+    "showdown": "0.2.x"
+  }
+  , "devDependencies": {
+    "requirejs": "2.0.x",
+    "mocha": "1.1.x",
+    "chai": "1.0.x"
+  }
+  , "scripts": {
+      "dtest": "./node_modules/.bin/mocha --reporter spec --no-colors --ui qunit --ignore-leaks --debug-brk",
+      "test": "./node_modules/.bin/mocha --reporter spec --no-colors --ui qunit --ignore-leaks"
+  }
+}
