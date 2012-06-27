@@ -21,7 +21,7 @@
     "chai": "1.0.x"
   }
   , "scripts": {
-      "dtest": "./node_modules/.bin/mocha --reporter spec --no-colors --ui qunit --ignore-leaks --debug-brk",
-      "test": "./node_modules/.bin/mocha --reporter spec --no-colors --ui qunit --ignore-leaks"
+      "dtest": "./node_modules/.bin/mocha --reporter spec --no-colors --ui qunit --debug-brk",
+      "test": "./node_modules/.bin/mocha --reporter spec --no-colors --ui qunit"
   }
 }
