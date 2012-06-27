@@ -12,8 +12,12 @@
   , "keywords": [
     "literate", "micro"
   ]
+  , "bin": {
+    "litjs": "./bin/litjs"
+  }
   , "dependencies": {
-    "showdown": "0.2.x"
+    "showdown": "0.2.x",
+    "optimist": "0.3.x"
   }
   , "devDependencies": {
     "requirejs": "2.0.x",

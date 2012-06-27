@@ -1,0 +1,56 @@
+#!/usr/bin/env node
+// litjs -- _Literate doc generator for Javascript_
+// https://github.com/apres/lit.js
+// Part of the Apres suite - http://apres.github.com/
+
+var fs = require('fs');
+var lit = require('../lib/lit');
+var opt = require('optimist')
+  .usage('Create annotated web page from JS source\n\nUsage: $0 [infile]')
+  .alias('t', 'template')
+  .describe('t', 'HTML template file name, defaults to columns.html')
+  .alias('o', 'out')
+  .describe('o', 'Output file, defaults to stdout')
+  .describe('title', 'Title for output page, defaults to input file name')
+var argv = opt.argv;
+
+if (argv.help) {
+  opt.showHelp();
+  process.exit(3);
+}
+
+// Substitute placeholder in template with a value
+// placeholder format is: <!--{{name}}-->
+var substitute = function(template, name, value) {
+  return template.replace(new RegExp('<!--{{' + name + '}}-->', 'g'), value);
+}
+
+// Read the html template file and input source code
+var templatePath = argv.template || __dirname + '/../template/columns.html';
+var html = fs.readFileSync(templatePath, 'utf8').toString();
+var src;
+var inpath = argv._[0];
+if (inpath) {
+  src = fs.readFileSync(inpath, 'utf8').toString();
+  if (!argv.title) {
+    inpath = inpath.split('/')
+    argv.title = inpath[inpath.length - 1];
+  }
+} else {
+  process.stdin.resume();
+  process.stdin.setEncoding('utf8');
+  process.stdin.once('data', function(data) {
+    src = data
+  });
+}
+
+// Generate HTML
+if (argv.title) html = substitute(html, 'title', argv.title);
+html = substitute(html, 'sections', lit.makeHtml(src));
+
+// Write to output file or stdout
+if (argv.out) {
+  fs.writeFileSync(argv.out, html, 'utf8');
+} else {
+  console.log(html);
+}
