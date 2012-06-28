@@ -1,0 +1,70 @@
+/*
+ * lit.js - https://github.com/apres/lit.js
+ * Part of the Apres suite - http://apres.github.com/
+ */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.lit {
+  position: relative;
+  left: 41%;
+  float: left;
+  background-color: #f2f2ff;
+  /*border-left: 2px solid #ccc;*/
+  box-shadow: 0 0 20px #bb9;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+.lit h1 {
+  font-size: 32px;
+}
+.lit h2 {
+  font-size: 24px;
+  color: #445;
+}
+.lit h3 {
+  font-size: 20px;
+  color: #445;
+}
+.lit h4 {
+  font-size: 18px;
+  color: #445;
+}
+.lit h5, .lit h6 {
+  font-size: 16px;
+  font-style: italic;
+  color: #445;
+}
+
+.lit section {
+  page-break-inside: avoid;
+  text-rendering: optimizeLegibility;
+  float: left;
+  width: 100%;
+}
+
+.lit .comment, .lit.comment {
+  position: relative;
+  left: -41.5%;
+  float: left;
+  height: 100%;
+  width: 38%;
+  font-size: 14px;
+  white-space: pre;
+  padding: 0 1em 0 1em;
+}
+
+.lit .code {
+  position: relative;
+  left: -40%;
+  float: left;
+  height: 100%;
+  width: 50%;
+  font-family: Menlo, Monaco, 'Courier New', monospace;
+  font-size: 14px;
+  white-space: pre;
+  padding: 0 1em 0 1em;
+}
+
