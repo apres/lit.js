@@ -45,7 +45,11 @@ if (inpath) {
 }
 
 // Generate HTML
-if (argv.title) html = substitute(html, 'title', argv.title);
+if (argv.title) {
+  html = substitute(html, 'title', argv.title);
+  // Inject a comment at the top for a header
+  src = '// #' + argv.title + '#\n\n' + src
+}
 html = substitute(html, 'sections', lit.makeHtml(src));
 
 // Write to output file or stdout
