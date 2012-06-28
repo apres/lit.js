@@ -89,7 +89,7 @@ test('#div wrapper', function() {
   var html = lit.makeHtml(sections);
   var lines = html.split('\n');
   assert.strictEqual(lines[0], '<div class="lit">');
-  assert.strictEqual(lines[lines.length-1], '</div>');
+  assert.strictEqual(lines[lines.length-2], '</div>');
 });
 
 test('#section structure', function() {
@@ -102,8 +102,8 @@ test('#section structure', function() {
   assert.strictEqual(lines[1], '<section>');
   assert.strictEqual(lines[2], '<div class="comment">');
   assert.strictEqual(lines[4], '</div>');
-  assert.strictEqual(lines[5], '<code>');
-  assert.strictEqual(lines[7], '</code>');
+  assert.strictEqual(lines[5], '<div class="code">');
+  assert.strictEqual(lines[7], '</div>');
   assert.strictEqual(lines[8], '</section>');
 });
 
