@@ -12,7 +12,16 @@ var opt = require('optimist')
   .alias('o', 'out')
   .describe('o', 'Output file, defaults to stdout')
   .describe('title', 'Title for output page, defaults to input file name')
+  .describe('style', 'Page style, one of "columns" or "callouts"')
+  .default('style', 'columns')
+  .alias('s', 'style')
 var argv = opt.argv;
+
+if (argv.style !== 'columns' && argv.style !== 'callouts') {
+  console.error('Unknown style: "%s"\n', argv.style);
+  opt.showHelp();
+  process.exit(1);
+}
 
 if (argv.help) {
   opt.showHelp();
@@ -50,6 +59,7 @@ if (argv.title) {
   // Inject a comment at the top for a header
   src = '// #' + argv.title + '#\n\n' + src
 }
+html = substitute(html, 'style', argv.style);
 html = substitute(html, 'sections', lit.makeHtml(src));
 
 // Write to output file or stdout
