@@ -39,7 +39,7 @@ suite('lit.parse()');
 
 test('#empty doc', function() {
   var lit = require('../lib/lit');
-  assert.deepEqual(lit.parse(''), {sections: [{comments: '', code: '\n'}]});
+  assert.deepEqual(lit.parse(''), {sections: [{comments: '', code: ''}]});
 });
 
 test('#single section', function() {
@@ -53,7 +53,7 @@ test('#single section', function() {
   assert.equal(res.sections.length, 1);
   assert.strictEqual(res.sections[0].comments, 'First Line\nSecond Line\n');
   assert.strictEqual(res.sections[0].code, 
-    'var foo = function() {\n  return true;\n}\n');
+    'var foo = function() {\n  return true;\n}');
 });
 
 test('#multi section', function() {
@@ -71,11 +71,11 @@ test('#multi section', function() {
   var res = lit.parse(src);
   assert.equal(res.sections.length, 3);
   assert.strictEqual(res.sections[0].comments, 'One\n');
-  assert.strictEqual(res.sections[0].code, 'var one;\n');
+  assert.strictEqual(res.sections[0].code, 'var one;');
   assert.strictEqual(res.sections[1].comments, 'Two\n');
-  assert.strictEqual(res.sections[1].code, 'var two;\nsomething();\n\nanother()\n\n');
+  assert.strictEqual(res.sections[1].code, 'var two;\nsomething();\n\nanother()');
   assert.strictEqual(res.sections[2].comments, 'Three\n\nMore comments\n');
-  assert.strictEqual(res.sections[2].code, 'three();\n');
+  assert.strictEqual(res.sections[2].code, 'three();');
 });
 
 suite('lit.makeHtml()');
@@ -130,3 +130,11 @@ test('#section content', function() {
   assert.equal(split[3].indexOf('Code 1'), -1);
   assert.equal(split[3].indexOf('Code 2'), -1);
 });
+
+test('#preprocess collapses empty lines', function() {
+  var lit = require('../lib/lit');
+  var src = '// Comments\n\n\nSome\n\nCode';
+  var html = lit.makeHtml(src);
+  assert.include(html, '<div class="code">\nSome\n\nCode\n</div>');
+});
+
