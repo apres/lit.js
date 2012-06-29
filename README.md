@@ -27,7 +27,7 @@ CLI
 The command-line script `litjs` is provided to create annotated web pages from
 Javascript source files.
 
-<code><pre>
+```
 Create annotated web page from JS source
 
 Usage: litjs [infile]
@@ -37,4 +37,4 @@ Options:
   -o, --out       Output file, defaults to stdout                   
   --title         Title for output page, defaults to input file name
   --style, -s     Page style, one of "columns" or "callouts"          [default: "columns"]
-</pre></code>
+```
