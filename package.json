@@ -1,0 +1,18 @@
+{
+    "name": "lit.js-example-pages"
+  , "private": true
+  , "version": "0.0.0"
+  , "author": "Casey Duncan <apres.project@gmail.com>"
+  , "repository": {
+    "type": "git",
+    "url": "https://github.com/apres/lit.js"
+  }
+  , "license": "MIT"
+  , "dependencies": {
+    "node-static": "0.5.x",
+    "request": "2.9.x"
+  }
+  , "scripts": {
+      "start": "node server.js"
+  }
+}
