@@ -16,7 +16,7 @@
     "litjs": "./bin/litjs"
   }
   , "dependencies": {
-    "showdown": "0.2.x",
+    "ghm": "1.0.x",
     "optimist": "0.3.x"
   }
   , "devDependencies": {
