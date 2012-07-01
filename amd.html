@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!-- lit.js browser + amd module example
+     https://github.com/apres/lit.js -->
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <title>lit.js</title>
+  <script src="lib/require.js"></script>
+  <link href='../css/lit-columns.css' rel='stylesheet' type='text/css'>
+  <style type="text/css">
+    nav {
+      position: fixed;
+      width: 100%;
+      background: black;
+      padding: 8px;
+      height: 25px;
+      color: white;
+      font-family: 'Helvetica Neue', Helvetica, sans-serif;
+      font-weight: bold;
+      z-index: 1000;
+    }
+    .lit {
+      margin-top: 32px;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <label for="script">Select script to annotate:</label>
+    <select name="script" onchange="setScript(this.value)">
+      <option>lit.js</option>
+      <option>apres.js</option>
+      <option>showdown.js</option>
+    </select>
+  </nav>
+  <div id="lit.js"></div>
+  <script>
+    requirejs.config({baseUrl: 'lib'});
+    function setScript(script) {
+      require(['lit', 'text!' + script], function(lit, src) {
+        var elem = document.getElementById('lit.js');
+        elem.innerHTML = lit.makeHtml(src);
+      });
+    }
+    setScript('lit.js');
+  </script>
+</body>
+</html>
