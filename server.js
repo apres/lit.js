@@ -7,6 +7,6 @@ http.createServer(function(req, res) {
   req.addListener('end', function() {
     file.serve(req, res);
   });
-}).listen(6000);
+}).listen(5000);
 
 console.log("Lit-examples now being server at http://localhost:5000");
