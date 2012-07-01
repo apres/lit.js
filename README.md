@@ -24,8 +24,9 @@ to be able to run it anywhere.
 Examples
 --------
 
-- [Columns Style](http://apres.github.com/lit.js/columns.html)
-- [Callouts Style](http://apres.github.com/lit.js/callouts.html)
+- [Static Columns Style](http://apres.github.com/lit.js/columns.html)
+- [Static Callouts Style](http://apres.github.com/lit.js/callouts.html)
+- [In-Browser Demo](http://apres.github.com/lit.js/amd.html)
 
 CLI
 ---
