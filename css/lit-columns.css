@@ -64,6 +64,8 @@ body {
   font-family: Menlo, Monaco, 'Courier New', monospace;
   font-size: 14px;
   white-space: pre;
+  white-space: pre-wrap;
   padding: 0 1em 0 1em;
+  background-color: #f2f2ff;
 }
 
