@@ -13,9 +13,11 @@ test('#node require', function() {
 
 test('#requirejs require', function(done) {
   requirejs.config({baseUrl: 'lib', nodeRequire: requirejs});
-    requirejs(['lit'], function(lit) {
+    requirejs(['lit', 'showdown', 'highlight'], function(lit, showdown, highlight) {
       assert.isFunction(lit.parse);
-      assert.ok(lit.amd);
+      assert.ok(lit.amd, 'lit not amd');
+      assert.ok(showdown, 'showdown not loaded');
+      assert.ok(highlight, 'highlight not loaded');
       done();
     }, 
     function(err) {done(err)});
