@@ -17,7 +17,8 @@
   }
   , "dependencies": {
     "ghm": "1.0.x",
-    "optimist": "0.3.x"
+    "optimist": "0.3.x",
+    "highlight.js": "7.0.x"
   }
   , "devDependencies": {
     "requirejs": "2.0.x",
@@ -25,7 +26,7 @@
     "chai": "1.0.x"
   }
   , "scripts": {
-      "dtest": "./node_modules/.bin/mocha --reporter spec --no-colors --ui qunit --debug-brk",
-      "test": "./node_modules/.bin/mocha --reporter spec --no-colors --ui qunit"
+      "dtest": "./node_modules/.bin/mocha --reporter spec --no-colors --ui qunit --debug-brk --ignore-leaks",
+      "test": "./node_modules/.bin/mocha --reporter spec --no-colors --ui qunit --ignore-leaks"
   }
 }
