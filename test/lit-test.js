@@ -41,7 +41,7 @@ suite('lit.parse()');
 
 test('#empty doc', function() {
   var lit = require('../lib/lit');
-  assert.deepEqual(lit.parse(''), {sections: [{comments: '', code: ''}]});
+  assert.deepEqual(lit.parse(''), {sections: []});
 });
 
 test('#single section', function() {
@@ -146,3 +146,14 @@ test('#html escaped in comments', function() {
   var html = lit.makeHtml(src);
   assert.include(html, '&lt;a&gt; anchor');
 });
+
+test('#empty lines between comments collapsed', function() {
+  var lit = require('../lib/lit');
+  var src = '// Comment One\n\n// Comment Two\n// Comment Two More\n\n\n\n// Comment Three';
+  var sections = lit.parse(src).sections;
+  assert.equal(sections.length, 1);
+  assert.strictEqual(sections[0].code, '');
+  assert.strictEqual(sections[0].comments, 
+    'Comment One\n\nComment Two\nComment Two More\n\n\n\nComment Three\n');
+});
+
