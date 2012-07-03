@@ -33,9 +33,17 @@ code .string {
   color: firebrick;
 }
 
-code .regexp,
-code .title {
+code .regexp {
   color: firebrick;
+}
+
+code .title {
+  color: darkgreen;
+  font-weight: bold;
+}
+
+code .params {
+  color: darkgreen;
 }
 
 code .parent,
