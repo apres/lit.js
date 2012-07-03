@@ -102,10 +102,10 @@ test('#section structure', function() {
   var html = lit.makeHtml(sections);
   var lines = html.split('\n');
   assert.strictEqual(lines[1], '<section>');
-  assert.strictEqual(lines[2], '<div class="comment">');
+  assert.strictEqual(lines[2], '<div class="lit-comment">');
   assert.strictEqual(lines[4], '</div>');
-  assert.strictEqual(lines[5], '<div class="code">');
-  assert.strictEqual(lines[7], '</div>');
+  assert.strictEqual(lines[5], '<code class="lit-code">');
+  assert.strictEqual(lines[7], '</code>');
   assert.strictEqual(lines[8], '</section>');
 });
 
@@ -137,6 +137,12 @@ test('#preprocess collapses empty lines', function() {
   var lit = require('../lib/lit');
   var src = '// Comments\n\n\nSome\n\nCode';
   var html = lit.makeHtml(src);
-  assert.include(html, '<div class="code">\nSome\n\nCode\n</div>');
+  assert.include(html, '<code class="lit-code">\nSome\n\nCode\n</code>');
 });
 
+test('#html escaped in comments', function() {
+  var lit = require('../lib/lit');
+  var src = '// <a> anchor';
+  var html = lit.makeHtml(src);
+  assert.include(html, '&lt;a&gt; anchor');
+});
