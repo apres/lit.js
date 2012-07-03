@@ -18,22 +18,22 @@ body {
 }
 
 .lit h1 {
-  font-size: 32px;
+  font-size: 28px;
 }
 .lit h2 {
-  font-size: 24px;
-  color: #445;
-}
-.lit h3 {
-  font-size: 20px;
-  color: #445;
-}
-.lit h4 {
   font-size: 18px;
   color: #445;
 }
-.lit h5, .lit h6 {
+.lit h3 {
   font-size: 16px;
+  color: #445;
+}
+.lit h4 {
+  font-size: 15px;
+  color: #445;
+}
+.lit h5, .lit h6 {
+  font-size: 14px;
   font-style: italic;
   color: #445;
 }
