@@ -47,7 +47,7 @@ h1, h2, h3, h4, h5, h6 {
   width: 100%;
 }
 
-.lit .comment {
+.lit-comment {
   position: relative;
   float: left;
   height: 100%;
@@ -76,7 +76,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 997;
 }
 
-.lit .comment:after {
+.lit-comment:after {
   /* callout arrow */
   position: absolute;
   top: 1px;
@@ -88,7 +88,7 @@ h1, h2, h3, h4, h5, h6 {
   z-index: 999;
 }
 
-.lit .code {
+.lit-code {
   float: left;
   height: 100%;
   width: 50%;
