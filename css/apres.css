@@ -2,91 +2,91 @@
 Apres-style syntax highlighting
 */
 
-.code .comment,
-.code .annotation,
-.code .template_comment,
-.code .diff .header,
-.code .chunk,
-.code .apache .cbracket {
+code .comment,
+code .annotation,
+code .template_comment,
+code .diff .header,
+code .chunk,
+code .apache .cbracket {
   color: darkcyan;
 }
 
-.code .keyword {
+code .keyword {
   font-weight: bold;
   color: purple;
 }
 
-.code .id,
-.code .built_in,
-.code .smalltalk .class,
-.code .winutils,
-.code .bash .variable,
-.code .tex .command,
-.code .request,
-.code .status,
-.code .nginx .title {
+code .id,
+code .built_in,
+code .smalltalk .class,
+code .winutils,
+code .bash .variable,
+code .tex .command,
+code .request,
+code .status,
+code .nginx .title {
   color: navy;
 }
-.code .vhdl .string,
-.code .string {
+code .vhdl .string,
+code .string {
   font-style: italic;
   color: firebrick;
 }
 
-.code .regexp,
-.code .title {
+code .regexp,
+code .title {
   color: firebrick;
 }
 
-.code .parent,
-.code .tag .value,
-.code .rules .value,
-.code .rules .value .number,
-.code .ruby .symbol,
-.code .ruby .symbol .string,
-.code .ruby .symbol .keyword,
-.code .ruby .symbol .keymethods,
-.code .instancevar,
-.code .vhdl .literal,
-.code .aggregate,
-.code .template_tag,
-.code .django .variable,
-.code .addition,
-.code .flow,
-.code .stream,
-.code .apache .tag,
-.code .date,
-.code .tex .formula {
+code .parent,
+code .tag .value,
+code .rules .value,
+code .rules .value .number,
+code .ruby .symbol,
+code .ruby .symbol .string,
+code .ruby .symbol .keyword,
+code .ruby .symbol .keymethods,
+code .instancevar,
+code .vhdl .literal,
+code .aggregate,
+code .template_tag,
+code .django .variable,
+code .addition,
+code .flow,
+code .stream,
+code .apache .tag,
+code .date,
+code .tex .formula {
   color: green;
 }
 
-.code .ruby .string,
-.code .decorator,
-.code .filter .argument,
-.code .localvars,
-.code .array,
-.code .attr_selector,
-.code .pseudo,
-.code .pi,
-.code .doctype,
-.code .deletion,
-.code .envvar,
-.code .shebang,
-.code .preprocessor,
-.code .userType,
-.code .apache .sqbracket,
-.code .nginx .built_in,
-.code .tex .special,
-.code .input_number {
+code .ruby .string,
+code .decorator,
+code .filter .argument,
+code .localvars,
+code .array,
+code .attr_selector,
+code .pseudo,
+code .pi,
+code .doctype,
+code .deletion,
+code .envvar,
+code .shebang,
+code .preprocessor,
+code .userType,
+code .apache .sqbracket,
+code .nginx .built_in,
+code .tex .special,
+code .input_number {
   color: darkgoldenrod;
 }
 
-.code .phpdoc,
-.code .javadoc,
-.code .xmlDocTag {
+code .phpdoc,
+code .javadoc,
+code .xmlDocTag {
   color: gray;
 }
 
-.code .vhdl .typename { 
+code .vhdl .typename { 
   font-weight: bold; 
 }

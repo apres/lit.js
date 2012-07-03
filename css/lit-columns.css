@@ -38,14 +38,15 @@ body {
   color: #445;
 }
 
-.lit section {
+.lit>section {
   page-break-inside: avoid;
   text-rendering: optimizeLegibility;
+  clear: both;
   float: left;
   width: 100%;
 }
 
-.lit .comment, .lit.comment {
+.lit-comment {
   position: relative;
   left: -41.5%;
   float: left;
@@ -55,7 +56,7 @@ body {
   padding: 0 1em 0 1em;
 }
 
-.lit .code {
+.lit-code {
   position: relative;
   left: -40%;
   float: left;
