@@ -1,6 +1,6 @@
 {
     "name": "lit"
-  , "version": "0.1.0"
+  , "version": "1.0.0"
   , "description": "Micro-literate programming lib for javascript, inspired by docco"
   , "author": "Casey Duncan <apres.project@gmail.com>"
   , "contributors": []
