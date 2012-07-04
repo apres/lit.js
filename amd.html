@@ -7,11 +7,12 @@
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <title>lit.js</title>
   <script src="lib/require.js"></script>
-  <link href='css/lit-columns.css' rel='stylesheet' type='text/css'>
+  <link id="css" href='css/lit-columns.css' rel='stylesheet' type='text/css'>
   <link href='css/apres.css' rel='stylesheet' type='text/css'>
   <style type="text/css">
     nav {
       position: fixed;
+      top: 0;
       width: 100%;
       background: black;
       padding: 8px;
@@ -22,7 +23,7 @@
       z-index: 1000;
     }
     .lit {
-      margin-top: 32px;
+      margin-top: 40px;
     }
   </style>
 </head>
@@ -33,6 +34,12 @@
       <option>lit.js</option>
       <option>apres.js</option>
       <option>showdown.js</option>
+    </select>
+    <label for="css">Select style:</label>
+    <select name="css" onchange="setCss(this.value)">
+      <option value="css/lit-columns.css">columns</option>
+      <option value="css/lit-callouts.css">callouts</option>
+      <option value="css/lit-stacked.css">stacked</option>
     </select>
   </nav>
   <div id="lit.js"></div>
@@ -45,6 +52,10 @@
       });
     }
     setScript('lit.js');
+    function setCss(url) {
+      var cssElem = document.getElementById('css');
+      cssElem.setAttribute('href', url);
+    }
   </script>
 </body>
 </html>
