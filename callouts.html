@@ -12,164 +12,195 @@
 <body>
   <div class="lit">
 <section>
-<div class="comment">
-<h1 id="litjs">lit.js</h1>
-</div>
-<div class="code">
+<div class="lit-comment">
+<h1>lit.js</h1>
 
-
+<p>lit.js - Micro-literate programming library inspired by docco<br />By Casey Duncan<br /><a href='https://github.com/apres/lit.js'>https://github.com/apres/lit.js</a><br />Part of the Apres suite - <a href='http://apres.github.com/'>http://apres.github.com/</a><br />Lit is freely distributable under the MIT license.</p>
 </div>
+<code class="lit-code">
+;(<span class="keyword">function</span>() {
+  <span class="keyword">var</span> commentRe = <span class="regexp">/^\s*\/\/\s*/</span>;
+  <span class="keyword">var</span> whitespaceOnlyRe = <span class="regexp">/^\s*$/</span>;
+  <span class="keyword">var</span> lit = {};
+</code>
 </section>
 <section>
-<div class="comment">
-<p>lit.js - Micro-literate programming library inspired by docco<br>
-By Casey Duncan<br>
-https://github.com/apres/lit.js<br>
-Part of the Apres suite - http://apres.github.com/<br>
-Lit is freely distributable under the MIT license.</p>
-</div>
-<div class="code">
-;(function() {
-  var commentRe = /^\s*\/\/\s*/;
-  var whitespaceOnlyRe = /^\s*$/;
-  var lit = {};
+<div class="lit-comment">
+<h2>Utility function to escape HTML tags</h2>
 
-
+<p>Note this does not escape entities</p>
 </div>
-</section>
-<section>
-<div class="comment">
-<h2 id="rendercommentstohtml">Render comments to HTML</h2>
-
-<p>This defaults to showdown's makeHtml() function, if available
-otherwise it is a no-op. Applications can plug in their
-own function here to format comments anyway desired.</p>
-</div>
-<div class="code">
-  lit.renderComment = function(src) {return src};
-
-
-</div>
-</section>
-<section>
-<div class="comment">
-<h2 id="rendercodetohtml">Render code to HTML</h2>
-</div>
-<div class="code">
-  lit.renderCode = function(src) {
-    return String(src)
-      .replace(/&amp;(?!(\w+|\#\d+);)/g, '&amp;')
-      .replace(/&lt;/g, '&lt;')
-      .replace(/&gt;/g, '&gt;')
-      .replace(/&quot;/g, '&quot;');
+<code class="lit-code">
+  lit.escapeHtml = <span class="keyword">function</span>(src) {
+    <span class="keyword">return</span> String(src)
+      .replace(<span class="regexp">/&lt;/g</span>, <span class="string">'&amp;lt;'</span>)
+      .replace(<span class="regexp">/>/g</span>, <span class="string">'&amp;gt;'</span>)
+      .replace(<span class="regexp">/"/g</span>, <span class="string">'&amp;quot;'</span>);
   }
-
-
-</div>
+</code>
 </section>
 <section>
-<div class="comment">
-<h2 id="parsesourcecodeintosections">Parse source code into sections</h2>
+<div class="lit-comment">
+<h2>Code renderer hook function</h2>
 
-<p>Produces an object with an attribute <code>sections</code>, an array of
-objects containing the code and comments for each code section.
-Each section is denoted by one or more leading comments</p>
+<p>This hook function processes code and returns HTML. <br />If available it uses highlight.js to syntax highlight the source code.<br />Applications can plug in their own code renderer here.</p>
 </div>
-<div class="code">
-  lit.parse = function(src) {
-    var sections = [];
-    var lines = src.split('\n');
-    var i, line, comments = '', code = '';
-    for (i = 0; i &lt; lines.length; i++) {
+<code class="lit-code">
+  lit.renderCode = lit.escapeHtml;
+</code>
+</section>
+<section>
+<div class="lit-comment">
+<h2>Comment renderer hook function</h2>
+
+<p>This hook function processes comments into HTML.<br />If available it uses showdown to process the comments as markdown<br />into HTML. Applications can plug in their own comment renderer here.</p>
+</div>
+<code class="lit-code">
+  lit.renderComment = lit.escapeHtml;
+</code>
+</section>
+<section>
+<div class="lit-comment">
+<h2>Code pre-processor hook function</h2>
+
+<p>This function is used to process code strings before feeding them<br />to the syntax highlighter. The default behavior is to strip leading<br />and trailing newlines.</p>
+</div>
+<code class="lit-code">
+  lit.preprocessCode = <span class="keyword">function</span>(s) {
+    <span class="keyword">return</span> s.replace(<span class="regexp">/^\n*/</span>, <span class="string">''</span>).replace(<span class="regexp">/\n*$/</span>, <span class="string">''</span>)
+  }
+</code>
+</section>
+<section>
+<div class="lit-comment">
+<h2>Parse source code into sections</h2>
+
+<p>Produces an object with an attribute <code>sections</code>, an array of<br />objects containing the code and comments for each code section.<br />Each section is denoted by one or more leading comments</p>
+</div>
+<code class="lit-code">
+  lit.parse = <span class="keyword">function</span>(src) {
+    <span class="keyword">var</span> sections = [];
+    <span class="keyword">var</span> lines = src.split(<span class="string">'\n'</span>);
+    <span class="keyword">var</span> i, line, comments = <span class="string">''</span>, code = <span class="string">''</span>, blanks = <span class="string">''</span>;
+    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; lines.length; i++) {
       line = lines[i];
-      if (commentRe.test(line)) {
-        if (code) {
-          sections.push({comments: comments, code: code});
-          comments = ''; code = '';
+      <span class="keyword">if</span> (commentRe.test(line)) {
+        <span class="keyword">if</span> (code) {
+          sections.push({comments: comments, code: lit.preprocessCode(code)});
+          comments = code = blanks = <span class="string">''</span>;
         }
-        comments += line.replace(commentRe, '') + '\n';
-      } else {
-        code += line + '\n';
+        comments += blanks + line.replace(commentRe, <span class="string">''</span>) + <span class="string">'\n'</span>;
+        blanks = <span class="string">''</span>;
+      } <span class="keyword">else</span> <span class="keyword">if</span> (line || code) {
+        code += blanks + line + <span class="string">'\n'</span>;
+        blanks = <span class="string">''</span>;
+      } <span class="keyword">else</span> {
+</code>
+</section>
+<section>
+<div class="lit-comment">
+<p>Collect blank lines before code that may be part of comments</p>
+</div>
+<code class="lit-code">
+        blanks += <span class="string">'\n'</span>;
       }
     }
-    if (code || comments) {
-      sections.push({comments: comments, code: code});
+    <span class="keyword">if</span> (code || comments) {
+      sections.push({comments: comments, code: lit.preprocessCode(code)});
     }
-    return {sections: sections};
+    <span class="keyword">return</span> {sections: sections};
   }
-
-
-</div>
+</code>
 </section>
 <section>
-<div class="comment">
-<h2 id="createhtmlfromsourceorparsedsections">Create html from source, or parsed sections</h2>
+<div class="lit-comment">
+<h2>Create html from source, or parsed sections</h2>
 
-<p>Return an HTML fragment for the source or parsed sections
-provided.</p>
+<p>Return an HTML fragment for the source or parsed sections provided.</p>
 </div>
-<div class="code">
-  lit.makeHtml = function(s) {
-    var section, i, comments, code;
-    if (typeof s === 'string') s = lit.parse(s).sections;
-    var html = '&lt;div class=&quot;lit&quot;&gt;\n';
-    for (i = 0; (section = s[i]); i++) {
-      comments = section.comments ? lit.renderComment(section.comments) : '';
-      if (whitespaceOnlyRe.test(comments)) comments = '&nbsp;';
-      code = section.code ? lit.renderCode(section.code) : '';
-      html += ( '&lt;section&gt;\n' 
-              + '&lt;div class=&quot;comment&quot;&gt;\n' + comments + '\n&lt;/div&gt;\n'
-              + '&lt;div class=&quot;code&quot;&gt;\n' + code + '\n&lt;/div&gt;\n'
-              + '&lt;/section&gt;\n' );
+<code class="lit-code">
+  lit.makeHtml = <span class="keyword">function</span>(s) {
+    <span class="keyword">var</span> section, i, comments, code;
+    <span class="keyword">if</span> (<span class="keyword">typeof</span> s === <span class="string">'string'</span>) s = lit.parse(s).sections;
+    <span class="keyword">var</span> html = <span class="string">'&lt;div class="lit">\n'</span>;
+    <span class="keyword">for</span> (i = <span class="number">0</span>; (section = s[i]); i++) {
+      comments = section.comments ? lit.renderComment(section.comments) : <span class="string">''</span>;
+      <span class="keyword">if</span> (whitespaceOnlyRe.test(comments)) comments = <span class="string">'&amp;nbsp;'</span>;
+      code = section.code ? lit.renderCode(section.code) : <span class="string">''</span>;
+      html += ( <span class="string">'&lt;section>\n'</span> 
+              + <span class="string">'&lt;div class="lit-comment">\n'</span> + comments + <span class="string">'\n&lt;/div>\n'</span>
+              + <span class="string">'&lt;code class="lit-code">\n'</span> + code + <span class="string">'\n&lt;/code>\n'</span>
+              + <span class="string">'&lt;/section>\n'</span> );
     }
-    html += '&lt;/div&gt;\n';
-    return html;
+    html += <span class="string">'&lt;/div>\n'</span>;
+    <span class="keyword">return</span> html;
   }
-
-
-</div>
+</code>
 </section>
 <section>
-<div class="comment">
+<div class="lit-comment">
+<p>Install default comment render hook</p>
+</div>
+<code class="lit-code">
+  <span class="keyword">var</span> hookRenderComment = <span class="keyword">function</span>(Showdown) {
+    lit.renderComment = <span class="keyword">function</span>(src) {
+      src = lit.escapeHtml(src);
+      <span class="keyword">var</span> converter = <span class="keyword">new</span> Showdown.converter();
+      <span class="keyword">return</span> converter.makeHtml(src);
+    }
+  };
+</code>
+</section>
+<section>
+<div class="lit-comment">
+<p>Install default code render hook</p>
+</div>
+<code class="lit-code">
+  <span class="keyword">var</span> hookRenderCode = <span class="keyword">function</span>(highlight) {
+    lit.renderCode = <span class="keyword">function</span>(src) {
+      <span class="keyword">var</span> hl = highlight.highlight(<span class="string">'javascript'</span>, src);
+      <span class="keyword">return</span> hl.value;
+    }
+  };
+</code>
+</section>
+<section>
+<div class="lit-comment">
 <p>Loaded via AMD</p>
 </div>
-<div class="code">
-  if (typeof define === 'function' &amp;&amp; define.amd) {
-    define(['showdown'], function(showdown) {
-      if (showdown) lit.renderComment = showdown.makeHtml;
-      lit.amd = true;
-      return lit;
+<code class="lit-code">
+  <span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">'function'</span> &amp;&amp; define.amd) {
+    define([<span class="string">'showdown'</span>, <span class="string">'highlight'</span>], <span class="keyword">function</span>(Showdown, highlight) {
+      <span class="keyword">if</span> (Showdown) hookRenderComment(Showdown);
+      <span class="keyword">if</span> (highlight) hookRenderCode(highlight);
+      lit.amd = <span class="literal">true</span>;
+      <span class="keyword">return</span> lit;
     });
-
-</div>
+</code>
 </section>
 <section>
-<div class="comment">
+<div class="lit-comment">
 <p>Loaded via CommonJS/Node</p>
 </div>
-<div class="code">
-  } else if (typeof require === 'function' &amp;&amp; module) {
-    var showdown = new (require('showdown').converter)()
-    lit.renderComment = showdown.makeHtml;
+<code class="lit-code">
+  } <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> require === <span class="string">'function'</span> &amp;&amp; module) {
+    hookRenderComment(require(<span class="string">'./showdown'</span>)); <span class="comment">// Use local fork of ghm</span>
+    hookRenderCode(require(<span class="string">'highlight.js'</span>));
     module.exports = lit;
-
-</div>
+</code>
 </section>
 <section>
-<div class="comment">
+<div class="lit-comment">
 <p>Global script-include</p>
 </div>
-<div class="code">
-  } else {
+<code class="lit-code">
+  } <span class="keyword">else</span> {
     window.lit = lit;
-    if (typeof Showdown !== 'undefined') {
-      lit.renderComment = new Showdown.converter().makeHtml;
-    }
+    <span class="keyword">if</span> (<span class="keyword">typeof</span> Showdown !== <span class="string">'undefined'</span>) hookRenderComment(Showdown);
+    <span class="keyword">if</span> (<span class="keyword">typeof</span> highlight !== <span class="string">'undefined'</span>) hookRenderCode(highlight);
   }
-}).call(this);
-
-
-</div>
+}).call(<span class="keyword">this</span>);
+</code>
 </section>
 </div>
 
