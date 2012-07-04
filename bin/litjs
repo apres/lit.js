@@ -12,12 +12,12 @@ var opt = require('optimist')
   .alias('o', 'out')
   .describe('o', 'Output file, defaults to stdout')
   .describe('title', 'Title for output page, defaults to input file name')
-  .describe('style', 'Page style, one of "columns" or "callouts"')
+  .describe('style', 'Page style, one of "columns", "callouts", or "stacked"')
   .default('style', 'columns')
   .alias('s', 'style')
 var argv = opt.argv;
 
-if (argv.style !== 'columns' && argv.style !== 'callouts') {
+if (argv.style !== 'columns' && argv.style !== 'callouts' && argv.style !== 'stacked') {
   console.error('Unknown style: "%s"\n', argv.style);
   opt.showHelp();
   process.exit(1);
