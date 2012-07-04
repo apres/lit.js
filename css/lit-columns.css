@@ -41,7 +41,6 @@ body {
 .lit>section {
   page-break-inside: avoid;
   text-rendering: optimizeLegibility;
-  clear: both;
   float: left;
   width: 100%;
 }
