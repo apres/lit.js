@@ -26,6 +26,7 @@ Examples
 
 - [Static Columns Style](http://apres.github.com/lit.js/columns.html)
 - [Static Callouts Style](http://apres.github.com/lit.js/callouts.html)
+- [Static Stacked Style](http://apres.github.com/lit.js/stacked.html)
 - [In-Browser Demo](http://apres.github.com/lit.js/amd.html)
 
 CLI
@@ -43,5 +44,5 @@ Javascript source files.
     -t, --template  HTML template file name, defaults to columns.html 
     -o, --out       Output file, defaults to stdout                   
     --title         Title for output page, defaults to input file name
-    --style, -s     Page style, one of "columns" or "callouts"          [default: "columns"]
+    --style, -s     Page style, one of "columns", "callouts", or "stacked"  [default: "columns"]
 ```
