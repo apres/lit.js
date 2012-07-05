@@ -60,7 +60,12 @@ body {
   border: 1px dotted #ccc;
   padding: 0 2px 0 2px;
   font-family: Menlo, Monaco, 'Courier New', monospace;
+}
+
+.lit-comment pre code {
   display: inline-block;
+  max-width: 100%;
+  overflow: auto;
 }
 
 .lit-code {
