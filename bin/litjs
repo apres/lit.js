@@ -53,6 +53,12 @@ if (inpath) {
   });
 }
 
+if (!src) {
+  console.error('Error: Input data required.');
+  opt.showHelp();
+  process.exit(1);
+}
+
 // Generate HTML
 if (argv.title) {
   html = substitute(html, 'title', argv.title);
